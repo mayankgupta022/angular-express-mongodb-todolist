@@ -88,7 +88,7 @@ router.delete('/todolist/:id', function(req, res) {
 	var id = req.params.id;
     var collection = db.get('todolist');
     collection.remove({
-    	'id' : id
+    	"_id" : id
     }, function(e){
     	if(e) {
     		res.json({
