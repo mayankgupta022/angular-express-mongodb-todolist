@@ -1,4 +1,5 @@
 var express = require('express');
+var credentials = require('../credentials');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -29,11 +30,12 @@ router.post('/todolist', function(req, res) {
     		res.json({
     			'status' : 1
     		});
-    	}
-        res.json({
-        	'status' : 0,
-        	'todoitem' : doc
-        });
+    	} else {
+	        res.json({
+	        	'status' : 0,
+	        	'todoitem' : doc
+	        });
+	    }
     });
 });
 
@@ -42,11 +44,17 @@ router.get('/todolist/:id', function(req, res) {
 	var db = req.db;
 	var id = req.params.id;
     var collection = db.get('todolist');
-    collection.findOne({"id": id},{},function(e,doc){
-        res.json({
-        	'status' : 0,
-        	'todoitem' : doc
-        });
+    collection.findById(id, function(e,doc){
+        if(e) {
+    		res.json({
+    			'status' : 1
+    		});
+    	} else {
+	        res.json({
+	        	'status' : 0,
+	        	'todoitem' : doc
+	        });
+	    }
     });
 });
 
@@ -65,13 +73,33 @@ router.put('/todolist/:id', function(req, res) {
     		res.json({
     			'status' : 1
     		});
-    	}
-        res.json({
-        	'status' : 0,
-        	'todoitem' : doc
-        });
+    	} else {
+	        res.json({
+	        	'status' : 0,
+	        	'todoitem' : doc
+	        });
+	    }
     });
 });
 
+//Delete an item in list
+router.delete('/todolist/:id', function(req, res) {
+	var db = req.db;
+	var id = req.params.id;
+    var collection = db.get('todolist');
+    collection.remove({
+    	'id' : id
+    }, function(e){
+    	if(e) {
+    		res.json({
+    			'status' : 1
+    		});
+    	} else {
+	        res.json({
+	        	'status' : 0
+	        });
+	    }
+    });
+});
 
 module.exports = router;
