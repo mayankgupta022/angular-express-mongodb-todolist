@@ -1,10 +1,10 @@
-<ul  class="todolist">
+<ul class="todolist">
     <li ng-repeat="todo in todos">
-        <span>{{todo.text}}</span>
-        <a href="" ng-click="todoList.delete()" title="delete">X</a>
+        <span>{{todo.todo}}</span>
+        <a href="" ng-click="delete(todo)" title="delete">X</a>
     </li>
     <li>
         <input ng-model="todo" />
-        <a href="" ng-click="todoList.add()" title="add">+</a>
-    <li>
+        <a href="" ng-click="add(todo)" title="add">+</a>
+    </li>
 </ul>

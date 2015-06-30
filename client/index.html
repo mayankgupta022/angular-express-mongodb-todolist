@@ -2,8 +2,15 @@
 <html>
 <head>
     <script src="bower_components/angular/angular.min.js"></script>
-
-    <!-- Router -->
+    <script src="bower_components/angular/angular-route.js"></script>
+    
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body ng-app="TodoApp">
+    <header>Todo List</header>
+    <section ng-view>
+    </section>
+     <!-- Router -->
     <script src="app.js"></script>
 
     <!-- Controllers -->
@@ -11,12 +18,5 @@
 
     <!-- Services -->
     <script src="services/Todo.js"></script>
-
-    <link rel="stylesheet" href="todo.css">
-</head>
-<body ng-app="todoApp">
-    <header>Todo List</header>
-    <section ng-view>
-    </section>
 </body>
 </html>
